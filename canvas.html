@@ -7,18 +7,21 @@
 </head>
 <body>
     <div>
-        <canvas id="draw" style="width: 600px; height: 600px;"></canvas>
+        <canvas id="draw" ></canvas>
     </div>
 </body>
 <style></style>
 <script>
-    const drawCanvas=document.getElementById("draw");
+    const drawCanvas=document.querySelector('#draw');
     const context=drawCanvas.getContext("2d");
+    drawCanvas.width = window.innerWidth;
+    drawCanvas.height = window.innerHeight;
     context.strokeStyle="blue";
-    context.lineWidth=10;
+    context.lineWidth=1;
     context.lineJoin="round";
     context.lineCap="round";
-    let lastX=0;let lastY=0;
+    let lastX=0;
+    let lastY=0;
     let draw=false;
 
     document.addEventListener("mousedown",down);
@@ -28,7 +31,7 @@
     function move (e){
         if(draw){
             context.beginPath();
-            context.moveTo(lastX,lastX);
+            context.moveTo(lastX,lastY);
             context.lineTo(e.offsetX,e.offsetY);
             context.stroke();
             [lastX,lastY]=[e.offsetX,e.offsetY];
@@ -37,11 +40,10 @@
     function down(e){
         draw=true;
         [lastX,lastY]=[e.offsetX,e.offsetY];
-        console.log(e);
     }
     function up(){
         draw=false;
     }
-    console.log(context);
+console.log(context);
 </script>
 </html>
