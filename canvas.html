@@ -33,6 +33,8 @@
             context.beginPath();
             context.moveTo(lastX,lastY);
             context.lineTo(e.offsetX,e.offsetY);
+            const color=e.offsetX % 260;
+            context.strokeStyle=`hsl(${color}, 100%, 50%)`;
             context.stroke();
             [lastX,lastY]=[e.offsetX,e.offsetY];
         }
@@ -44,6 +46,6 @@
     function up(){
         draw=false;
     }
-console.log(context);
+
 </script>
 </html>
