@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <canvas id="draw" style="width: 600px; height: 600px;"></canvas>
+    </div>
+</body>
+<style></style>
+<script>
+    const drawCanvas=document.getElementById("draw");
+    const context=drawCanvas.getContext("2d");
+    context.strokeStyle="blue";
+    context.lineWidth=10;
+    context.lineJoin="round";
+    context.lineCap="round";
+    let lastX=0;let lastY=0;
+    let draw=false;
+
+    document.addEventListener("mousedown",down);
+    document.addEventListener("mouseup",up);
+    document.addEventListener("mousemove",move);
+
+    function move (e){
+        if(draw){
+            context.beginPath();
+            context.moveTo(lastX,lastX);
+            context.lineTo(e.offsetX,e.offsetY);
+            context.stroke();
+            [lastX,lastY]=[e.offsetX,e.offsetY];
+        }
+    }
+    function down(e){
+        draw=true;
+        [lastX,lastY]=[e.offsetX,e.offsetY];
+        console.log(e);
+    }
+    function up(){
+        draw=false;
+    }
+    console.log(context);
+</script>
+</html>
